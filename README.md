@@ -1,9 +1,10 @@
 # README
 
 Create 3 text files (without extensions) named:
-    - 'TOKEN': put your discord bot token in here
-    - 'CHANNEL': put your discord channel ID where you want the announcements made to
-    - 'USERNAMES': crawl usernames who you want to receive announcements of, one per line
+
+- 'TOKEN': put your discord bot token in here
+- 'CHANNEL': put your discord channel ID where you want the announcements made to
+- 'USERNAMES': crawl usernames who you want to receive announcements of, one per line
 
 To get the channel ID, in discord go to user settings->appearence and enable developer mode, then right click on the channel and select 'Copy ID'
 
