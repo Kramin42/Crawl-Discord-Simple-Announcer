@@ -5,6 +5,8 @@ import socketio
 import datetime
 import json
 
+CRAWLAPI_SERVER = 'http://crawlapi.mooo.com/'
+
 with open('TOKEN', 'r') as f:
     TOKEN = f.read().strip()
 print('Using token:', TOKEN)
@@ -17,13 +19,12 @@ with open('USERNAMES', 'r') as f:
     USERNAMES = [name.strip().lower() for name in f.read().split('\n') if name.strip()!='']
 print('crawl usernames:', ', '.join(USERNAMES))
 
-CRAWLAPI_SERVER = 'http://crawlapi.mooo.com/'
-
 client = discord.Client()
 
 loop = asyncio.get_event_loop()
 
 sio = socketio.AsyncClient()
+
 
 # formatter
 
@@ -59,6 +60,7 @@ def format_event(event):
     else:
         return format_gameover(data)
 
+
 # Discord handlers
 
 @client.event
@@ -67,9 +69,10 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, msg)
+    # can add custom discord commands here
+    # if message.content.startswith('!hello'):
+    #     msg = 'Hello {0.author.mention}'.format(message)
+    #     await client.send_message(message.channel, msg)
 
 @client.event
 async def on_ready():
@@ -77,6 +80,7 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+
 
 # Socketio handlers
 
@@ -93,6 +97,9 @@ async def sio_on_crawlevent(data):
 async def start_sio():
     await sio.connect(CRAWLAPI_SERVER)
     await sio.wait()
+
+
+# start asyncio loop
 
 try:
     loop.run_until_complete(asyncio.gather(
